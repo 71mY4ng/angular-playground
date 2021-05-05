@@ -1,0 +1,71 @@
+<div>
+    <button mat-icon-button>Icon</button>
+    <button mat-fab>Icon</button>
+    <button mat-mini-fab>Icon</button>
+</div>
+
+<div>
+    {{toggleBtn.checked}}
+    <mat-button-toggle color="primary"  #toggleBtn disableRipple>Icon</mat-button-toggle>
+    <button color="accent" mat-button>Icon</button>
+    <button color="warn" mat-button>Icon</button>
+</div>
+
+
+<div class="badged-container">
+    <span [matBadge]="notificationsCnt" [matBadgeHidden]="notificationsCnt === 0">Notifications</span>
+</div>
+
+<div>
+    <button color="accent" mat-button (click)="loadData()">loadData</button>
+    <mat-spinner *ngIf="showProgress"></mat-spinner>
+</div>
+
+<h3>{{hero.name}} Details</h3>
+<div><span>id: </span>{{hero.id}}</div>
+<div><span>name: </span>{{hero.name}}</div>
+
+<div>
+    <label for="name">Hero name:</label>
+    <input id="name" [(ngModel)]="hero.name" placeholder="name">
+</div>
+
+<h2>My Heroes</h2>
+
+<!-- <ul class="heroes">
+    <li *ngFor="let h of heroes" (click)="onSelect(h)">
+        <span class="badge">{{h.id}}</span> {{h.name}}
+    </li>
+</ul> -->
+<mat-selection-list role="list" [multiple]="false">
+    <mat-list-option role="listitem"
+                    *ngFor="let h of heroes"
+                    [class.selected]="h === selectedHero"
+                    (click)="onSelect(h)">
+        <div mat-line>
+            <span class="badge">{{h.id}}</span> {{h.name}}
+        </div>
+    </mat-list-option>
+</mat-selection-list>
+
+<!-- <div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}}</h2>
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <div>
+        <label for="hero-name">Selected Hero name:</label>
+        <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+</div> -->
+
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}}</h2>
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <mat-form-field class="play-form-field">
+        <mat-label>change {{selectedHero.name}} name</mat-label>
+        <input matInput id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name" type="text">
+        <button mat-button *ngIf="selectedHero.name" matSuffix mat-icon-button aria-label="Clear"
+            (click)="selectedHero.name=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>

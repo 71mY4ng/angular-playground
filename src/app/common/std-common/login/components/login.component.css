@@ -1,0 +1,26 @@
+.app-login-full-with {
+    width: 100%;
+}
+
+.app-login-container {
+    width: 450px;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+}
+
+mat-card-title, mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-form-field {
+    width: 100%;
+    min-width: 300px;
+}
+
+.login-button {
+    display: flex;
+    justify-content: flex-end;
+}

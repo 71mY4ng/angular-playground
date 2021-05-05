@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-play';
+  name = 'Tim';
+  authenticated: boolean = false;
+  
+  constructor(private http: HttpClient) {
+    
+  }
+  
 }
+

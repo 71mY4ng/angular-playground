@@ -1,5 +1,14 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+.play-form-field {
+    width: 200px;
+}
+
+
 button {
     margin-left: 10px;
+}
+
+.badged-container {
+    margin: 3rem;
 }
