@@ -4,9 +4,11 @@ import { DatatableViewComponent } from './datatable-view/datatable-view.componen
 
 import { MaterialModule } from '../../material/material.module';
 import { DatatableModule } from './datatable/datatable.module';
+import { DyDialogComponent } from './dy-dialog/dy-dialog.component';
 
 const components = [
     DatatableViewComponent,
+    DyDialogComponent,
 ];
 
 @NgModule({
@@ -15,6 +17,7 @@ const components = [
         CommonModule,
         DatatableModule,
         MaterialModule,
-    ]
+    ],
+    exports: components
 })
 export class StdCommonModule { }

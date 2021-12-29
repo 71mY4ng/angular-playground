@@ -33,6 +33,10 @@ export class MainHeaderBarComponent implements OnInit {
               label: 'Datatable Test',
               link: '/datatable-view',
               index: 2
+          },{
+              label: 'Dynamic Template',
+              link: '/dy-temp',
+              index: 3
           },
       ];
   }
