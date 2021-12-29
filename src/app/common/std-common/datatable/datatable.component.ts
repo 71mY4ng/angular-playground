@@ -31,7 +31,7 @@ export class DatatableComponent implements OnInit {
   @Output() page = new EventEmitter<PageEvent>();
 
   columns: string[] = [];
-  rows: Object[] = [];
+  rows: any[] = [];
   loading = false;
   selection = new SelectionModel<any>(true, []);
 
@@ -43,22 +43,22 @@ export class DatatableComponent implements OnInit {
       }
   }
 
-  pageTotal: number = 0;
+  pageTotal = 0;
 
-  constructor(private dataService: DataService<Object>) { }
+  constructor(private dataService: DataService<any>) { }
 
   ngOnInit(): void {
       this.fetchData();
-      this.GenColumns();
+      this.genColumns();
   }
 
-  GenColumns() {
+  genColumns() {
       this.columns = Object.keys(this.rows[0]);
       this.createDataSource();
   }
 
   createDataSource(): void {
-      this.dataSource = new MatTableDataSource<Object>(this.rows);
+      this.dataSource = new MatTableDataSource<any>(this.rows);
   }
 
   fetchData(): void {
