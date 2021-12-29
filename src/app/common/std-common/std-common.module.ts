@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DatatableComponent } from './datatable/datatable.component';
 import { DatatableViewComponent } from './datatable-view/datatable-view.component';
 
 import { MaterialModule } from '../../material/material.module';
+import { DatatableModule } from './datatable/datatable.module';
 
 const components = [
-  DatatableComponent,
-  DatatableViewComponent,
+    DatatableViewComponent,
 ];
 
 @NgModule({
-  declarations: components,
-  imports: [
-    CommonModule,
-    MaterialModule,
-  ]
+    declarations: components,
+    imports: [
+        CommonModule,
+        DatatableModule,
+        MaterialModule,
+    ]
 })
 export class StdCommonModule { }

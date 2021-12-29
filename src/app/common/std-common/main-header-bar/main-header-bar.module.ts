@@ -7,14 +7,14 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
-  declarations: [MainHeaderBarComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    AppRoutingModule
-  ],
-  exports: [
-    MainHeaderBarComponent
-  ]
+    declarations: [MainHeaderBarComponent],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AppRoutingModule
+    ],
+    exports: [
+        MainHeaderBarComponent
+    ]
 })
 export class MainHeaderBarModule { }

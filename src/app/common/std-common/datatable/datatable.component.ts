@@ -1,41 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatatableDataService } from '../datatable-data.service';
 import { DataService } from './data.service';
 
+export interface ColumnConfig {
+  displayName: string;
+  hide?: boolean;
+  dataFn: (value: any) => any;
+}
+
 @Component({
-  selector: 'app-datatable',
-  templateUrl: './datatable.component.html',
-  styleUrls: ['./datatable.component.css'],
-  providers: [
-    { provide: DataService, useClass: DatatableDataService }
-  ]
+    selector: 'app-datatable',
+    templateUrl: './datatable.component.html',
+    styleUrls: ['./datatable.component.css'],
+    providers: [
+        { provide: DataService, useClass: DatatableDataService }
+    ]
 })
 export class DatatableComponent implements OnInit {
 
-  
+  @Input() columnConf?: Map<string, ColumnConfig> = new Map<string, ColumnConfig>();
+  @Input() pageSize = 10;
+  @Input() enabledSelection?: boolean = true;
+  @Input() dataSource?: MatTableDataSource<any>;
+
+  @Output() rowSelected = new EventEmitter<any[]>();
+  @Output() page = new EventEmitter<PageEvent>();
+
   columns: string[] = [];
   rows: Object[] = [];
-  dataSource?: MatTableDataSource<Object>;
+  loading = false;
+  selection = new SelectionModel<any>(true, []);
+
+  paginator!: MatPaginator;
+
+  @ViewChild(MatPaginator, {static: false}) set paginatorComponent(component: MatPaginator) {
+      if (component) {
+          this.paginator = component;
+      }
+  }
+
+  pageTotal: number = 0;
 
   constructor(private dataService: DataService<Object>) { }
 
   ngOnInit(): void {
-    this.fetchData();
-    this.GenColumns();
+      this.fetchData();
+      this.GenColumns();
   }
-  
+
   GenColumns() {
-    this.columns = Object.keys(this.rows[0])
-    this.createDataSource();
+      this.columns = Object.keys(this.rows[0]);
+      this.createDataSource();
   }
-  
+
   createDataSource(): void {
-    this.dataSource = new MatTableDataSource<Object>(this.rows);
+      this.dataSource = new MatTableDataSource<Object>(this.rows);
   }
 
   fetchData(): void {
-    this.dataService.getDatum()
-      .subscribe(datum => this.rows = datum);
+      this.dataService.getDatum()
+          .subscribe(datum => this.rows = datum);
   }
 }

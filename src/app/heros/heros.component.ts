@@ -4,9 +4,9 @@ import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 
 @Component({
-  selector: 'app-heros',
-  templateUrl: './heros.component.html',
-  styleUrls: ['./heros.component.css']
+    selector: 'app-heros',
+    templateUrl: './heros.component.html',
+    styleUrls: ['./heros.component.css']
 })
 export class HerosComponent implements OnInit {
 
@@ -15,8 +15,8 @@ export class HerosComponent implements OnInit {
   showProgress = false;
 
   hero: Hero = {
-    id: 1,
-    name: 'WindStorms'
+      id: 1,
+      name: 'WindStorms'
   };
 
   heroes = HEROES;
@@ -28,14 +28,14 @@ export class HerosComponent implements OnInit {
   }
 
   loadData(): void {
-    this.showProgress = true;
-    setInterval(() => {
-      this.showProgress = false;
-    }, 3000);
+      this.showProgress = true;
+      setInterval(() => {
+          this.showProgress = false;
+      }, 3000);
   }
-  
+
   onSelect(selected: Hero): void {
-    this.selectedHero = selected;
+      this.selectedHero = selected;
   }
 
 }

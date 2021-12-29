@@ -15,27 +15,35 @@ import { environment } from '../environments/environment';
 import { MainHeaderBarModule } from './common/std-common/main-header-bar/main-header-bar.module';
 import { LoginModule } from './common/std-common/login/login.module';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { ScheduleMaintainComponent } from './pages/schedule-maintain/schedule-maintain.component';
+import { HolidayMaintainComponent } from './pages/holiday-maintain/holiday-maintain.component';
+import { ServerFileComponent } from './pages/server-file/server-file.component';
+import { PageModule } from './pages/page.module';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HerosComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    StdCommonModule,
-    MainHeaderBarModule,
-    LoginModule,
-    NgxWebstorageModule.forRoot()
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HerosComponent,
+        ScheduleMaintainComponent,
+        HolidayMaintainComponent,
+        ServerFileComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        StdCommonModule,
+        MainHeaderBarModule,
+        LoginModule,
+        NgxWebstorageModule.forRoot(),
+        PageModule
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

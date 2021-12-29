@@ -21,7 +21,7 @@ interface AuthRequest {
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
   private _username?: string;
@@ -33,65 +33,65 @@ export class AuthService {
   }
 
   signUp(signUpRequest: SignUpRequest): Observable<any> {
-    return this.http.post('/api/auth/register', signUpRequest);
+      return this.http.post('/api/auth/register', signUpRequest);
   }
 
   login(loginReq: AuthRequest) {
-    return this.http.post<AuthResponse>('/api/auth/login', loginReq)
-      .pipe(
-        map(data => {
-          this._username = data.username;
-          this.localStorage.store('authToken', data.authToken);
-          this.localStorage.store('username', data.username);
-          this.localStorage.store('refreshToken', data.refreshToken);
-          this.localStorage.store('expiresAt', data.expiresAt);
+      return this.http.post<AuthResponse>('/api/auth/login', loginReq)
+          .pipe(
+              map(data => {
+                  this._username = data.username;
+                  this.localStorage.store('authToken', data.authToken);
+                  this.localStorage.store('username', data.username);
+                  this.localStorage.store('refreshToken', data.refreshToken);
+                  this.localStorage.store('expiresAt', data.expiresAt);
 
-          return true;
-        }));
+                  return true;
+              }));
   }
-  
+
   refreshToken() {
-    return this.http.post<AuthResponse>('/api/auth/refreshToken', {
-      refreshToken: this.localStorage.retrieve('refreshToken'),
-      username: this.localStorage.retrieve('username')
-    }).pipe(
-      tap(resp => {
-        this.localStorage.clear('authToken');
-        this.localStorage.clear('expiresAt');
-        this.localStorage.store('authToken', resp.authToken);
-        this.localStorage.store('expiresAt', resp.expiresAt);
-      })
-    );
+      return this.http.post<AuthResponse>('/api/auth/refreshToken', {
+          refreshToken: this.localStorage.retrieve('refreshToken'),
+          username: this.localStorage.retrieve('username')
+      }).pipe(
+          tap(resp => {
+              this.localStorage.clear('authToken');
+              this.localStorage.clear('expiresAt');
+              this.localStorage.store('authToken', resp.authToken);
+              this.localStorage.store('expiresAt', resp.expiresAt);
+          })
+      );
   }
 
   get username() {
-    return this._username || this.localStorage.retrieve('username');
+      return this._username || this.localStorage.retrieve('username');
   }
 
   getAuthToken() {
-    return this.localStorage.retrieve('authToken');
+      return this.localStorage.retrieve('authToken');
   }
 
   isAuthenticated(): boolean {
-    return !!this.getAuthToken;
+      return !!this.getAuthToken;
   }
 
   logout() {
-    let refreshTokenReq: RefreshTokenRequest = {
-      refreshToken: this.localStorage.retrieve('refreshToken'),
-      username: this.localStorage.retrieve('username')
-    };
-    this.http.post('/api/auth/signoff', refreshTokenReq)
-    .subscribe(resp => {
+      const refreshTokenReq: RefreshTokenRequest = {
+          refreshToken: this.localStorage.retrieve("refreshToken"),
+          username: this.localStorage.retrieve("username")
+      };
+      this.http.post('/api/auth/signoff', refreshTokenReq)
+          .subscribe(resp => {
 
-    }, error => {
-      throwError(error);
-    })
-    
-    this.localStorage.clear('authToken');
-    this.localStorage.clear('username');
-    this.localStorage.clear('refreshToken');
-    this.localStorage.clear('expiresAt');
+          }, error => {
+              throwError(error);
+          });
+
+      this.localStorage.clear('authToken');
+      this.localStorage.clear('username');
+      this.localStorage.clear('refreshToken');
+      this.localStorage.clear('expiresAt');
   }
-  
+
 }

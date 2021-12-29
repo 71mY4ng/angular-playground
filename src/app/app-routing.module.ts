@@ -6,13 +6,13 @@ import { LoginGuard } from './common/std-common/login/login.guard';
 import { HerosComponent } from './heros/heros.component'
 
 const routes: Routes = [
-  { path: 'heroes', component: HerosComponent },
-  { path: 'datatable-view', component: DatatableViewComponent, canActivate: [ LoginGuard ] },
-  { path: 'login', component: LoginComponent },
+    { path: 'heroes', data: { breadcrumb: 'Heroes' }, component: HerosComponent },
+    { path: 'datatable-view', data: { breadcrumb: 'Datatable' }, component: DatatableViewComponent, canActivate: [ LoginGuard ] },
+    { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
